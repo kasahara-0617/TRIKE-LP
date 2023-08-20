@@ -1,0 +1,82 @@
+@charset "UTF-8";
+@use "common" as c;
+
+//////////////////////////////
+// color
+//////////////////////////////
+$black: #222;
+$white: #fff;
+$red: #af1e15;
+$darkRed: #300000;
+$redGradient: linear-gradient(90deg, #af1e15 40%, #300000 100%);
+
+//////////////////////////////
+// font
+//////////////////////////////
+$en: "Futura",
+  "Didact Gothic",
+  "Helvetica Neue",
+  "Helvetica",
+  "Hiragino Sans",
+  "Hiragino Kaku Gothic ProN",
+  "Arial",
+  "Yu Gothic",
+  "Meiryo",
+  sans-serif;
+$jp: "Noto Sans JP",
+  "Helvetica Neue",
+  "Helvetica",
+  "Hiragino Sans",
+  "Hiragino Kaku Gothic ProN",
+  "Arial",
+  "Yu Gothic",
+  "Meiryo",
+  sans-serif;
+
+//////////////////////////////
+// ease
+//////////////////////////////
+$ease1: cubic-bezier(0.33, 1, 0.68, 1);
+
+//////////////////////////////
+// component
+//////////////////////////////
+@mixin title {
+  display: flex;
+  flex-direction: column;
+  color: $red;
+
+  &__english {
+    position: relative;
+    width: fit-content;
+    font-family: $en;
+    font-size: c.responsiveClamp(36, 96, 320, 1024);
+    line-height: 1.14;
+    letter-spacing: 0.1em;
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: c.rem(-36);
+      width: 15%;
+      height: 1px;
+      background-color: $red;
+      scale: 0 1;
+      transform-origin: top left;
+      transition: all 0.5s $ease1;
+    }
+
+
+    &.is-inview::before {
+      scale: 1 1;
+    }
+  }
+
+  &__japanese {
+    margin-left: c.responsiveClamp(4, 8, 320, 1024);
+    font-family: $jp;
+    font-size: c.rem(12);
+    letter-spacing: 0.3em;
+  }
+}

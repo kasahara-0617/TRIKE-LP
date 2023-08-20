@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90.71 90.71"><defs><style>
+    path {
+      fill: #222;
+    }
+    @media (prefers-color-scheme: dark) {
+      path {
+        fill: #fff;
+      }
+    }
+  </style></defs><path d="m52.07,19.97v60.81h-13.37V19.97h-20.37v-10.05h54.04v10.05h-20.31Z"/></svg>

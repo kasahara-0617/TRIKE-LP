@@ -1,0 +1,830 @@
+@import url("https://fonts.googleapis.com/css2?family=Didact+Gothic&family=Noto+Sans+JP:wght@400;700&display=swap");
+/* --------------------------------
+* base
+* -------------------------------- */
+*,
+*:before,
+*:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+*:focus {
+  outline: none;
+}
+
+html {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  font-family: "Futura", "Didact Gothic", "Noto Sans JP", "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Yu Gothic", "Meiryo", sans-serif;
+  font-feature-settings: "palt";
+  -webkit-font-smoothing: antialiased;
+  white-space: nowrap;
+  line-height: 1.8;
+  letter-spacing: 0.06em;
+  color: #222;
+  background-color: #fff;
+}
+body.is-hover {
+  cursor: none;
+}
+body.view {
+  overflow: hidden;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  overflow-wrap: break-word;
+}
+
+a {
+  color: currentColor;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+}
+
+/* -------------------------------- header -------------------------------- */
+.header {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: clamp(2rem, 1.545rem + 2.27vw, 3rem) 4.75rem 0 4.75rem;
+  color: #fff;
+  font-family: "Futura", "Didact Gothic", "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Yu Gothic", "Meiryo", sans-serif;
+  font-size: 0.75rem;
+  transition: all 0.3s cubic-bezier(0.33, 1, 0.68, 1);
+  z-index: 999;
+}
+@media (width < 600px) {
+  .header {
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 1.875rem 0;
+  }
+}
+.header__logo a {
+  display: block;
+  width: clamp(4.75rem, -1.972rem + 17.92vw, 9.5rem);
+}
+.header__logo a svg {
+  fill: #fff;
+}
+.header__nav__list {
+  display: flex;
+  gap: 0 clamp(2.5rem, -3.318rem + 29.09vw, 3.5rem);
+}
+.header__nav__list__item a {
+  position: relative;
+}
+.header__nav__list__item a::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 1px;
+  background-color: #fff;
+  transition: all 0.3s cubic-bezier(0.33, 1, 0.68, 1);
+}
+.header__nav__list__item a:hover::before {
+  width: 40%;
+}
+.header.active {
+  color: #af1e15;
+}
+.header.active svg {
+  fill: #af1e15;
+}
+.header.active .header__nav__list__item a::before {
+  background-color: #af1e15;
+}
+
+/* -------------------------------- cursor -------------------------------- */
+#cursor {
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 7.5rem;
+  height: 7.5rem;
+  z-index: 1000;
+}
+@media (width < 1024px) {
+  #cursor {
+    display: none;
+  }
+}
+#cursor::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #af1e15;
+  scale: 0;
+  transition: scale 0.3s cubic-bezier(0.33, 1, 0.68, 1);
+}
+#cursor::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  background: url(../images/icon_cross.svg) no-repeat center/cover;
+  scale: 0;
+  translate: -50% -50%;
+  transition: scale 0.3s cubic-bezier(0.33, 1, 0.68, 1);
+}
+#cursor.is-hover::before {
+  scale: 1;
+  transform-origin: center;
+  transition: scale 0.2s cubic-bezier(0.33, 1, 0.68, 1);
+}
+#cursor.is-hover::after {
+  scale: 1;
+  transform-origin: center;
+  transition: scale 0.2s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+/* -------------------------------- main -------------------------------- */
+/* ---------------- hero ---------------- */
+.hero {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  width: 100%;
+  height: 100vh;
+  padding: 0 clamp(2rem, -1.892rem + 10.38vw, 4.75rem);
+  background: url(../images/hero.webp) no-repeat center/cover;
+}
+.hero__cover {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #222;
+  opacity: 0.6;
+  z-index: 2;
+}
+.hero__title {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: clamp(1rem, 0.432rem + 2.84vw, 2.25rem);
+  z-index: 3;
+}
+.hero__title .js-fadeUp {
+  opacity: 0;
+  translate: -3.125rem 0;
+  transition: all 0.5s cubic-bezier(0.33, 1, 0.68, 1);
+}
+.hero__title .js-fadeUp:first-child img {
+  width: clamp(7.5rem, 4.091rem + 17.05vw, 15rem);
+  height: clamp(4.5rem, 2.455rem + 10.23vw, 9rem);
+}
+.hero__title .js-fadeUp:last-child img {
+  width: clamp(15.5rem, 8.455rem + 35.23vw, 31rem);
+  height: clamp(4.5rem, 2.455rem + 10.23vw, 9rem);
+}
+.hero__title .js-fadeUp.is-inview {
+  opacity: 1;
+  translate: 0 0;
+}
+.hero__title .js-fadeUp:last-child {
+  transition-delay: 0.08s;
+}
+.hero__scroll {
+  position: relative;
+  display: inline-block;
+  padding: 0 0 0 4.5rem;
+  color: #fff;
+  font-family: "Futura", "Didact Gothic", "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Yu Gothic", "Meiryo", sans-serif;
+  font-size: 0.75rem;
+  translate: clamp(5rem, 3.555rem + 6.16vw, 7.5rem) 0;
+  transform-origin: bottom left;
+  rotate: -90deg;
+  z-index: 3;
+}
+@media (width < 375px) {
+  .hero__scroll {
+    display: none;
+  }
+}
+.hero__scroll::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 3.75rem;
+  height: 1px;
+  background-color: #222;
+  translate: 0 -50%;
+  opacity: 0.4;
+}
+.hero__scroll::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 3.75rem;
+  height: 1px;
+  background-color: #fff;
+  translate: 0 -50%;
+  animation: scroll 2s cubic-bezier(1, 0, 0, 1) infinite;
+}
+@keyframes scroll {
+  0% {
+    transform: scale(0, 1);
+    transform-origin: 100% 0;
+  }
+  35% {
+    transform: scale(1, 1);
+    transform-origin: 100% 0;
+  }
+  36% {
+    transform: scale(1, 1);
+    transform-origin: 0 0;
+  }
+  70%, 100% {
+    transform: scale(0, 1);
+    transform-origin: 0 0;
+  }
+}
+
+/* ---------------- about ---------------- */
+.about {
+  width: 100%;
+  padding: clamp(6.25rem, 3.409rem + 14.2vw, 12.5rem) clamp(2rem, -0.5rem + 12.5vw, 7.5rem) clamp(4.75rem, 2.591rem + 10.8vw, 9.5rem);
+  font-family: "Noto Sans JP", "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Yu Gothic", "Meiryo", sans-serif;
+  color: #fff;
+  background: linear-gradient(90deg, #af1e15 40%, #300000 100%);
+}
+.about__copy {
+  margin-bottom: 4.75rem;
+  font-size: clamp(2rem, 1.091rem + 4.55vw, 4rem);
+  font-weight: 700;
+}
+.about__text {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2rem, 1.773rem + 1.14vw, 2.5rem) 0;
+  padding-bottom: 2.5rem;
+  font-size: clamp(0.75rem, 0.636rem + 0.57vw, 1rem);
+  line-height: 2.5;
+}
+.about__text::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #fff;
+  scale: 0;
+  transform-origin: center;
+  transition: all 0.5s cubic-bezier(0.33, 1, 0.68, 1);
+}
+.about__text.is-inview::before {
+  scale: 1;
+}
+.about__text .sp {
+  display: none;
+}
+@media (width < 600px) {
+  .about__text .sp {
+    display: block;
+  }
+}
+
+/* ---------------- feature ---------------- */
+.feature {
+  margin-bottom: clamp(4.75rem, 2.591rem + 10.8vw, 9.5rem);
+  padding: clamp(4.75rem, 2.591rem + 10.8vw, 9.5rem) clamp(2rem, -1.409rem + 17.05vw, 9.5rem) 0;
+}
+.feature__title {
+  display: flex;
+  flex-direction: column;
+  color: #af1e15;
+}
+.feature__title__english {
+  position: relative;
+  width: -moz-fit-content;
+  width: fit-content;
+  font-family: "Futura", "Didact Gothic", "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Yu Gothic", "Meiryo", sans-serif;
+  font-size: clamp(2.25rem, 0.545rem + 8.52vw, 6rem);
+  line-height: 1.14;
+  letter-spacing: 0.1em;
+}
+.feature__title__english::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2.25rem;
+  width: 15%;
+  height: 1px;
+  background-color: #af1e15;
+  scale: 0 1;
+  transform-origin: top left;
+  transition: all 0.5s cubic-bezier(0.33, 1, 0.68, 1);
+}
+.feature__title__english.is-inview::before {
+  scale: 1 1;
+}
+.feature__title__japanese {
+  margin-left: clamp(0.25rem, 0.136rem + 0.57vw, 0.5rem);
+  font-family: "Noto Sans JP", "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Yu Gothic", "Meiryo", sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+}
+.feature__container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: clamp(6.25rem, 3.409rem + 14.2vw, 12.5rem) 0;
+  width: 100%;
+  margin-top: 8.75rem;
+}
+@media (width < 1024px) {
+  .feature__container {
+    flex-direction: column;
+  }
+}
+.feature__container__content {
+  width: 43%;
+  font-family: "Noto Sans JP", "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Yu Gothic", "Meiryo", sans-serif;
+  opacity: 0;
+  translate: 0 3.125rem;
+  transition: all 0.5s cubic-bezier(0.33, 1, 0.68, 1);
+}
+@media (width < 1024px) {
+  .feature__container__content {
+    width: 100%;
+  }
+}
+.feature__container__content.is-inview {
+  opacity: 1;
+  translate: 0 0;
+  transition-delay: 0.3s;
+}
+.feature__container__content:nth-child(even) {
+  margin-top: 8.125rem;
+}
+@media (width < 1024px) {
+  .feature__container__content:nth-child(even) {
+    margin-top: 0;
+  }
+}
+.feature__container__content__image {
+  width: 100%;
+  height: auto;
+}
+.feature__container__content__title {
+  margin: 1.75rem 0 0.75rem;
+  color: #af1e15;
+  font-size: clamp(1.5rem, 1.386rem + 0.57vw, 1.75rem);
+  font-weight: bold;
+  line-height: 1.4;
+}
+.feature__container__content__text {
+  font-size: clamp(0.813rem, 0.784rem + 0.14vw, 0.875rem);
+  white-space: normal;
+}
+
+/* ---------------- lineup ---------------- */
+.lineup {
+  margin-bottom: clamp(7.75rem, 5.591rem + 10.8vw, 12.5rem);
+  padding: clamp(4.75rem, 2.591rem + 10.8vw, 9.5rem) clamp(2rem, -1.409rem + 17.05vw, 9.5rem) 0;
+}
+.lineup__title {
+  display: flex;
+  flex-direction: column;
+  color: #af1e15;
+}
+.lineup__title__english {
+  position: relative;
+  width: -moz-fit-content;
+  width: fit-content;
+  font-family: "Futura", "Didact Gothic", "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Yu Gothic", "Meiryo", sans-serif;
+  font-size: clamp(2.25rem, 0.545rem + 8.52vw, 6rem);
+  line-height: 1.14;
+  letter-spacing: 0.1em;
+}
+.lineup__title__english::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2.25rem;
+  width: 15%;
+  height: 1px;
+  background-color: #af1e15;
+  scale: 0 1;
+  transform-origin: top left;
+  transition: all 0.5s cubic-bezier(0.33, 1, 0.68, 1);
+}
+.lineup__title__english.is-inview::before {
+  scale: 1 1;
+}
+.lineup__title__japanese {
+  margin-left: clamp(0.25rem, 0.136rem + 0.57vw, 0.5rem);
+  font-family: "Noto Sans JP", "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Yu Gothic", "Meiryo", sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+}
+.lineup__list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4.75rem 4.3125rem;
+  margin-top: 8.75rem;
+  width: 100%;
+}
+@media (width < 1152px) {
+  .lineup__list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (width < 600px) {
+  .lineup__list {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+.lineup__list__item {
+  width: 100%;
+}
+.lineup__list__item__image {
+  width: 100%;
+  height: clamp(9.5rem, 4.898rem + 23.01vw, 19.625rem);
+  -o-object-fit: cover;
+     object-fit: cover;
+  transition: all 0.5s cubic-bezier(0.33, 1, 0.68, 1);
+}
+.lineup__list__item__image:hover {
+  scale: 1.03;
+  opacity: 0.7;
+}
+.lineup__list__item__title {
+  color: #af1e15;
+  font-size: clamp(1.5rem, 1.146rem + 0.94vw, 1.75rem);
+  letter-spacing: 0.1em;
+}
+
+/* -------------------------------- modal -------------------------------- */
+.modal {
+  content-visibility: auto;
+  contain-intrinsic-size: 800px;
+  position: fixed;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(175, 30, 21, 0.5) 40%, rgba(48, 0, 0, 0.5) 100%);
+  overflow: scroll;
+  z-index: 2000;
+}
+.modal.view {
+  display: flex;
+}
+@media (1023px < width < 1152px) {
+  .modal {
+    padding-bottom: 2rem;
+  }
+}
+.modal__content {
+  position: relative;
+  display: none;
+  align-items: flex-end;
+  justify-content: space-between;
+  width: max(80%, 72rem);
+  height: 80%;
+  padding: clamp(1.5rem, 0.932rem + 2.84vw, 2.75rem) clamp(1.5rem, 0.591rem + 4.55vw, 3.5rem);
+  background-color: #fff;
+  box-shadow: 0 5px 8px 0 rgba(34, 34, 34, 0.2), 0 7px 20px 0 rgba(34, 34, 34, 0.17);
+  animation: modal 0.4s cubic-bezier(0.33, 1, 0.68, 1);
+}
+.modal__content.view {
+  display: flex;
+}
+@media (width < 1152px) {
+  .modal__content {
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(1.5rem, 0.932rem + 2.84vw, 2.75rem) 0;
+    width: 80%;
+    height: auto;
+  }
+}
+@media (1023px < width < 1152px) {
+  .modal__content {
+    margin-top: 25rem;
+  }
+}
+@keyframes modal {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.modal__content__close {
+  cursor: pointer;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: clamp(0.75rem, -1.019rem + 4.72vw, 2rem);
+  right: clamp(0.75rem, -1.019rem + 4.72vw, 2rem);
+  width: clamp(3rem, 2.091rem + 4.55vw, 5rem);
+  height: clamp(3rem, 2.091rem + 4.55vw, 5rem);
+  background-color: #af1e15;
+}
+@media (width < 1152px) {
+  .modal__content__close {
+    top: auto;
+    bottom: clamp(0.75rem, -1.019rem + 4.72vw, 2rem);
+  }
+}
+@media (width < 600px) {
+  .modal__content__close {
+    display: flex;
+    top: -3.75rem;
+    bottom: auto;
+    right: 0;
+  }
+}
+.modal__content__close img {
+  width: 1.5rem;
+  height: 1.5rem;
+  rotate: 45deg;
+}
+.modal__content__slider {
+  width: 32.5rem;
+  height: clamp(15rem, -9.764rem + 66.04vw, 32.5rem);
+}
+@media (width < 1152px) {
+  .modal__content__slider {
+    width: 100%;
+  }
+}
+.modal__content__slider__image {
+  width: 100%;
+  height: clamp(15rem, -9.764rem + 66.04vw, 32.5rem);
+}
+.modal__content__slider__image img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.modal__content__slider__image video {
+  margin-top: clamp(3rem, -1.599rem + 12.26vw, 6.25rem);
+}
+.modal__content__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  width: 28.75rem;
+  height: 100%;
+}
+@media (width < 1152px) {
+  .modal__content__inner {
+    width: 100%;
+  }
+}
+.modal__content__inner__title {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: clamp(1.25rem, 0.909rem + 1.7vw, 2rem);
+  color: #af1e15;
+}
+@media (width < 1152px) {
+  .modal__content__inner__title {
+    order: 2;
+  }
+}
+.modal__content__inner__title__english {
+  position: relative;
+  width: -moz-fit-content;
+  width: fit-content;
+  font-family: "Futura", "Didact Gothic", "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Yu Gothic", "Meiryo", sans-serif;
+  font-size: clamp(2rem, 1.432rem + 2.84vw, 3.25rem);
+  line-height: 1.2;
+  letter-spacing: 0.09em;
+}
+.modal__content__inner__title__english::before {
+  content: "";
+  position: absolute;
+  left: 0.25rem;
+  bottom: -0.25rem;
+  width: 60%;
+  height: 1px;
+  background-color: #af1e15;
+}
+.modal__content__inner__title__japanese {
+  margin: 0.25rem 0 0 0.1875rem;
+  font-family: "Noto Sans JP", "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Yu Gothic", "Meiryo", sans-serif;
+  font-size: clamp(1rem, 0.773rem + 1.14vw, 1.5rem);
+  font-weight: bold;
+  letter-spacing: 0.1em;
+}
+.modal__content__inner__price {
+  margin-bottom: 2.5rem;
+  font-family: "Noto Sans JP", "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Yu Gothic", "Meiryo", sans-serif;
+  font-size: 0.9375rem;
+  line-height: 1.4;
+}
+@media (width < 1152px) {
+  .modal__content__inner__price {
+    order: 3;
+    margin-bottom: 0;
+  }
+}
+.modal__content__inner__price__big {
+  margin-right: 1px;
+  font-size: clamp(1.5rem, 1.386rem + 0.57vw, 1.75rem);
+  font-weight: bold;
+}
+.modal__content__inner__price__small {
+  margin-top: 0.5rem;
+  font-size: clamp(0.688rem, 0.659rem + 0.14vw, 0.75rem);
+}
+.modal__content__inner__thumbnail {
+  width: 100%;
+  height: 7.5rem;
+}
+@media (width < 1152px) {
+  .modal__content__inner__thumbnail {
+    order: 1;
+    align-self: center;
+    width: 70%;
+    height: clamp(3.25rem, 1.886rem + 6.82vw, 6.25rem);
+    margin-bottom: 2rem;
+  }
+}
+@media (width < 1024px) {
+  .modal__content__inner__thumbnail {
+    width: 100%;
+  }
+}
+.modal__content__inner__thumbnail__image {
+  width: 33.3333333333%;
+  height: 7.5rem;
+  margin-right: 1.25rem;
+}
+@media (width < 1152px) {
+  .modal__content__inner__thumbnail__image {
+    height: clamp(3.25rem, 1.886rem + 6.82vw, 6.25rem);
+  }
+}
+.modal__content__inner__thumbnail__image img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+/* -------------------------------- footer -------------------------------- */
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9.25rem 0;
+  width: 100%;
+  padding: 8.625rem clamp(2rem, -0.5rem + 12.5vw, 7.5rem) clamp(2rem, 1.659rem + 1.7vw, 2.75rem);
+  background: linear-gradient(90deg, #af1e15 40%, #300000 100%);
+}
+.footer__contact__title {
+  color: #fff;
+  font-family: "Futura", "Didact Gothic", "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Yu Gothic", "Meiryo", sans-serif;
+  font-size: clamp(3rem, 1.807rem + 5.97vw, 5.625rem);
+  letter-spacing: 0.08em;
+}
+.footer__contact__link {
+  display: flex;
+  justify-content: center;
+  gap: 0 clamp(3.25rem, 2.114rem + 5.68vw, 5.75rem);
+}
+.footer__contact__link a {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(3rem, 2.659rem + 1.7vw, 3.75rem);
+  height: clamp(3rem, 2.659rem + 1.7vw, 3.75rem);
+  border: 1px solid #fff;
+  border-radius: 50%;
+}
+.footer__contact__link a::before {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #fff;
+  scale: 1.3;
+  opacity: 0;
+  transition: all 0.5s cubic-bezier(0.33, 1, 0.68, 1);
+}
+.footer__contact__link a svg {
+  position: relative;
+  width: clamp(1.75rem, 1.636rem + 0.57vw, 2rem);
+  height: auto;
+  fill: #fff;
+}
+.footer__contact__link a:hover::before {
+  scale: 1;
+  opacity: 1;
+}
+.footer__contact__link a:hover svg {
+  fill: #af1e15;
+}
+.footer__nav {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1.25rem 1rem 0;
+  color: #fff;
+  font-family: "Futura", "Didact Gothic", "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Yu Gothic", "Meiryo", sans-serif;
+  font-size: 0.75rem;
+}
+@media (width < 1024px) {
+  .footer__nav {
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem 0;
+  }
+}
+.footer__nav::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #fff;
+  opacity: 0.5;
+  scale: 0;
+  transform-origin: center;
+  transition: all 0.5s cubic-bezier(0.33, 1, 0.68, 1);
+}
+.footer__nav.is-inview::before {
+  scale: 1;
+}
+.footer__nav__list {
+  display: flex;
+  gap: 0 clamp(3rem, 2.659rem + 1.7vw, 3.75rem);
+}
+.footer__nav__copyright {
+  opacity: 0.5;
+}/*# sourceMappingURL=style.css.map */
